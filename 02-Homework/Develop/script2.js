@@ -18,6 +18,8 @@ var charCollectionFourteen = "!@#$%^&*_-+";
 var charCollectionFifteen = "0123456789";
 
 function generatePassword(){
+  //Reset the password itself...not the value inside the element.
+  password = "";
   while (passwordLength < 8 && passwordLength > 128 && passwordLength === ""); {
     passwordLength = prompt("Please choose a valid length: Choose a length between 8 and 128");
   }
@@ -103,27 +105,8 @@ function generatePassword(){
       password += charCollectionFifteen[Math.floor(Math.random() * charCollectionFifteen.length)];
   }
 
-    return password
+       passwordText.value = password;
 }
 
-
-function writePassword() {
-  generateBtn.addEventListener('click', generatePassword);
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-  confirm("You want another password");
-  generatePassword();
-  // if user wants another password, set the .value of document.querySelector("#password") === '' and then generatePassword()
-//else alert("Here is your password") then return password.
-}
-
-writePassword();
-
-// function reset(){
-//   passwordText.value = ""
-// }
-
-// //window.addEventListener("click", function(){
-//   document.getElementById("#password").innerHTML
-// });
+generateBtn.addEventListener('click', generatePassword);
+//The reason that the value was concatenating instead of clearing was that it was simply returning the new password. We were clearing the value but not resetting the password.
